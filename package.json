@@ -6,7 +6,8 @@
   "scripts": {
     "build": "tsc --noEmit",
     "crawl": "ts-node src/index.ts",
-    "crawl:fast": "ts-node --transpile-only src/index.ts"
+    "crawl:fast": "ts-node --transpile-only src/index.ts",
+    "atlas:check": "ts-node src/check.ts"
   },
   "dependencies": {
     "@babel/parser": "^7.24.0",

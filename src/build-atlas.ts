@@ -63,7 +63,7 @@ export interface BuildResult extends Atlas {
   errors: string[]
 }
 
-export function buildAtlas(): BuildResult {
+export function buildAtlas(repoFilter?: string): BuildResult {
   const allRoutes: Route[] = []
   const allLinks: Link[] = []
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -73,8 +73,10 @@ export function buildAtlas(): BuildResult {
   const urlMap: Record<string, string[]> = {}
   for (const repo of REPOS) urlMap[repo.name] = repo.prodUrls
 
+  const reposToScan = repoFilter ? REPOS.filter(r => r.name === repoFilter) : REPOS
+
   // ── Crawl each repo ─────────────────────────────────────────────────────
-  for (const repo of REPOS) {
+  for (const repo of reposToScan) {
     console.log(`[routes] ${repo.name} …`)
     allRoutes.push(...crawlRoutes(repo.name, repo.path, repo.appDir))
 
